@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전화 거는 중</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #efdd77;
+            font-family: Arial, sans-serif;
+        }
+
+        .phone-container {
+            width: 80%;
+            max-width: 400px;
+            height: auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+            transition: all 0.3s ease;
+            animation: slideUp 0.5s ease forwards;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .phone-info-form {
+            width: 80%;
+            margin-top: 20px;
+        }
+
+        .phone-info-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .phone-info-form button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            background-color: rgb(240, 128, 128);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .phone-info-form button:hover {
+            background-color: rgb(250, 128, 114);
+        }
+
+        .gray-header {
+    background-color: #d3d3d3;
+    color: #000;
+    width: 100%;
+    padding: 12px 0;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.gray-bottom {
+    background-color: #d3d3d3;
+    color: #000;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    height: auto;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+    </style>
+</head>
+
+<body>
+    <div class="gray-header">
+        긴급전화 예시화면
+    </div>
+
+
+    <div class="phone-container">
+        <h2>전화 거는 중</h2>
+        <p>긴급 전화:</p>
+        <form class="phone-info-form">
+            <input type="text" placeholder="순천향대 천안병원 응급의료센터">
+            <input type="text" placeholder=" 충청남도 천안시 동남구 순천향6길 31 외례진료관">
+            <input type="text" placeholder="041-570-2119">
+        </form>
+
+        <p>나의 정보:</p>
+        <form class="phone-info-form">
+            <input type="text" placeholder="박솔민">
+            <input type="text" placeholder="정보 홀더1">
+            <input type="text" placeholder="010-1234-5678">
+            <button onclick="window.open('index4.html')">전화 걸기</button>
+        </form>
+    </div>
+
+    <div class="gray-bottom">
+    <p class="subtitle">/* 전화 걸기를 누르시면 <br>다음으로 넘어 갑니다. */</p>
+    </div>
+</body>
+
+</html>

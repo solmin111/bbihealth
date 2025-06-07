@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>삐약 AI 비서</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0; display: flex; flex-direction: column; height: 100vh; }
+    .chat-container { flex: 1; padding: 16px; overflow-y: auto; }
+    .message { max-width: 80%; margin: 8px 0; padding: 12px; border-radius: 8px; }
+    .user { background: #ffffff; align-self: flex-end; }
+    .assistant { background: #fa8072; color: #fff; align-self: flex-start; }
+    .input-area { display: flex; align-items: center; padding: 16px; background: #fff; }
+    .input-area button, .input-area textarea { margin-right: 8px; }
+    .input-area button { padding: 8px 12px; font-size: 1.2rem; background: #fa8072; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+    .input-area button:disabled { background: #ccc; cursor: not-allowed; }
+    .input-area textarea { flex: 1; resize: none; padding: 8px; font-size: 1rem; border: 1px solid #ccc; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <div class="chat-container" id="chatContainer"></div>
+  <div class="input-area">
+    <button id="voiceBtn">🎤</button>
+    <textarea id="userInput" rows="2" placeholder="질문을 입력하세요..."></textarea>
+    <button id="sendBtn">전송</button>
+  </div>
+
+  <script>
+    const chatContainer = document.getElementById('chatContainer');
+    const userInput = document.getElementById('userInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const voiceBtn = document.getElementById('voiceBtn');
+
+    // 음성 인식 설정
+    const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new Recognition();
+    recognition.lang = 'ko-KR';
+    recognition.interimResults = false;
+    recognition.continuous = false;
+
+    voiceBtn.addEventListener('click', () => {
+      recognition.start();
+    });
+
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      userInput.value = transcript;
+    };
+
+    recognition.onerror = (event) => {
+      console.error('Speech recognition error:', event.error);
+    };
+
+    sendBtn.addEventListener('click', async () => {
+      const text = userInput.value.trim();
+      if (!text) return;
+
+      addMessage(text, 'user');
+      userInput.value = '';
+      sendBtn.disabled = true;
+
+      try {
+        const BACKEND_URL = '#';
+        <!--Bend end point url domain-->>
+        const response = await fetch(`${BACKEND_URL}/api/chat`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text })
+        });
+
+        if (!response.ok) throw new Error('API 요청 실패');
+        const data = await response.json();
+        const reply = data.reply;
+
+        addMessage(reply, 'assistant');
+        speak(reply);
+      } catch (error) {
+        addMessage('서비스 이용 중 오류가 발생했습니다.', 'assistant');
+        console.error(error);
+      } finally {
+        sendBtn.disabled = false;
+      }
+    });
+
+    function addMessage(content, sender) {
+      const div = document.createElement('div');
+      div.classList.add('message', sender);
+      div.textContent = content;
+      chatContainer.appendChild(div);
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    function speak(text) {
+      if ('speechSynthesis' in window) {
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.lang = 'ko-KR';
+        speechSynthesis.speak(utter);
+      }
+    }
+  </script>
+</body>
+</html>

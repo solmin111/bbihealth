@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>개인정보 설정 - 옹아리</title>
+  <style>
+    :root {
+      --primary-red: #FA8072;
+      --bg-gray: #F4F4F4;
+      --bg-white: rgb(245, 245, 216);
+      --text-color: #333333;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg-white);
+      color: var(--text-color);
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      padding: 16px;
+      background: var(--primary-red);
+      color: #fff;
+    }
+    .header button {
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 20px;
+      margin-right: 12px;
+      cursor: pointer;
+    }
+    .header h1 {
+      font-size: 18px;
+      margin: 0;
+    }
+    .content {
+      padding: 16px;
+    }
+    form label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border: 1px solid #CCC;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    form textarea { resize: vertical; height: 80px; }
+    form button {
+      margin-top: 20px;
+      width: 100%;
+      background: var(--primary-red);
+      color: #fff;
+      border: none;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <button id="backBtn">←</button>
+    <h1>개인정보 설정</h1>
+  </div>
+  <div class="content">
+    <form id="profileForm">
+      <label for="name">이름</label>
+      <input type="text" id="name" name="name" placeholder="홍길동" required>
+
+      <label for="age">나이</label>
+      <input type="number" id="age" name="age" placeholder="예: 30" required>
+
+      <label for="phone">전화번호</label>
+      <input type="tel" id="phone" name="phone" placeholder="010-1234-5678" required>
+
+      <label for="address">주소</label>
+      <input type="text" id="address" name="address" placeholder="서울시 ...">
+
+      <label for="history">개인 병력</label>
+      <textarea id="history" name="history" placeholder="고혈압, 당뇨 등"></textarea>
+
+      <label for="allergy">알레르기 정보</label>
+      <input type="text" id="allergy" name="allergy" placeholder="예: 꽃가루 알레르기">
+
+      <label for="emergency">비상 연락처</label>
+      <input type="tel" id="emergency" name="emergency" placeholder="010-8765-4321">
+
+      <button type="submit">저장</button>
+    </form>
+  </div>
+  <script>
+    document.getElementById('backBtn').onclick = () => {
+      window.location.href = 'index4.html';
+    };
+    document.getElementById('profileForm').onsubmit = e => {
+      e.preventDefault();
+      alert('개인정보가 저장되었습니다.');
+      window.location.href = 'index4.html';
+    };
+  </script>
+</body>
+</html>

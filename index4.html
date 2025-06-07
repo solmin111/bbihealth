@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>옹아리 메인 페이지</title>
+  <style>
+    :root {
+      --primary-red: #FA8072;
+      --bg-gray: #F4F4F4;
+      --bg-white: #efdd77;
+      --text-color: #333333;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--bg-white);
+      color: var(--text-color);
+      font-weight: bold;
+    }
+    .container {
+      padding: 16px;
+      max-width: 480px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .user-section,
+    .settings-section {
+      background: var(--bg-gray);
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      flex: 1;
+    }
+    .user-section { margin-right: 8px; }
+    .user-section img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin-bottom: 6px;
+    }
+    .settings-wrapper {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    #box2 {
+      margin-top: 8px;
+      background: var(--bg-gray);
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+      font-size: 15px;
+    }
+    .back-btn {
+      display: none;
+      margin: 12px 0;
+      background: var(--bg-gray);
+      border: none;
+      border-radius: 6px;
+      padding: 8px 10px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .category-item {
+      background: var(--bg-gray);
+      padding: 14px;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+      font-size: 16px;
+      height: 100px;
+    }
+    .list-view {
+      display: none;
+      margin-top: 20px;
+    }
+    .list-view .item {
+      background: var(--bg-gray);
+      margin-bottom: 12px;
+      padding: 12px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+    }
+    .item img {
+      width: 120px;
+      height: 70px;
+      border-radius: 6px;
+      margin-right: 12px;
+      object-fit: cover;
+      background: #000;
+    }
+    .item .info {
+      flex: 1;
+    }
+    .item .info .name {
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+    .item .info .desc {
+      font-size: 14px;
+      color: #555;
+    }
+    .hamburger {
+      margin-top: 16px;
+      background: var(--primary-red);
+      color: #FFF;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .banner-ad {
+      background: var(--bg-gray);
+      padding: 12px;
+      text-align: center;
+      font-weight: bold;
+      margin-top: 50px;
+      margin-bottom: 50px;
+      border-radius: 8px;
+      background-color: rgb(255, 254, 191);
+      
+    }
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      height: 120px;
+      margin-top: 12px;
+      border-radius: 8px;
+      background-color: rgb(255, 254, 191);
+    }
+    .carousel-inner {
+      display: flex;
+      width: max-content;
+      animation: slide 10s linear infinite;
+    }
+    .carousel-inner img {
+      width: 100px;
+      height: 80px;
+      border-radius: 6px;
+      margin-right: 8px;
+      object-fit: cover;
+      cursor: pointer;
+    }
+    @keyframes slide {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    .carousel-text {
+      position: absolute;
+      width: auto;
+      height: auto;
+      top: 90%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--text-color);
+      pointer-events: none;
+    }
+    .ai-support {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 120px;
+      height: 120px;
+      background: url('병아리.png') no-repeat center/contain;
+      background-color: #f08e16;
+      border-radius: 20%;
+      cursor: pointer;
+      z-index: 500;
+    }
+    .rotate_food{
+        width: 100px;
+        height: 100px;
+    }
+    .category-item img{
+      width: 70px;
+      height: 60px;
+      border-radius: 50%;
+      margin-bottom: 6px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="top-bar">
+      <div class="user-section" id="userSection">
+        <img src="user.png" alt="유저 사진">
+        <div>개인정보 설정</div>
+      </div>
+      <div class="settings-wrapper">
+        <div class="settings-section" id="settingsSection">서비스 설정</div>
+        <div id="box2">Box2 페이지로 이동</div>
+      </div>
+    </div>
+
+    <button class="back-btn" id="backBtn">← 뒤로</button>
+
+    <div class="category-grid" id="categoryGrid">
+      <div class="category-item" data-id="1">정형외과<img src="정형외과.jpg" alt=""></div>
+      <div class="category-item" data-id="2">&nbsp;&nbsp;&nbsp;&nbsp;내과&nbsp;&nbsp;&nbsp;&nbsp;<img src="내과.jpg" style="width: auto;"></div>
+      <div class="category-item" data-id="3">&nbsp;&nbsp;&nbsp;&nbsp;치과&nbsp;&nbsp;&nbsp;&nbsp;<img src="치과.jpg" alt=""></div>
+      <div class="category-item" data-id="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;피부과&nbsp;&nbsp;&nbsp;&nbsp;<img src="피부과.jpg" alt=""></div>
+      <div class="category-item" data-id="5">산부인과<img src="산부인과.jpg" alt=""></div>
+      <div class="category-item" data-id="6">이비인후과<img src="이비인후과.jpg" alt=""></div>
+    </div>
+
+    <div class="list-view" id="listView"></div>
+
+    <button class="hamburger" id="hamburgerBtn">☰ 더보기</button>
+
+    <div class="banner-ad">베너광고</div>
+
+
+    <div class="carousel">
+      <div class="carousel-inner" id="carouselInner">
+        <img class="rotate_food" src="diet.png" alt="추천 음식">
+        <img class="rotate_food" src="diet.png" alt="추천 음식">
+        <img class="rotate_food" src="diet.png" alt="추천 음식">
+        <img class="rotate_food" src="diet.png" alt="추천 음식">
+      </div>
+      <div class="carousel-text">환절기 감기에 좋아요</div>
+    </div>
+  </div>
+
+  <div class="ai-support" id="aiSupport"></div>
+
+  <script>
+    const categories = {
+      1: [
+        { name: '정형외과 A', desc: '근골격계 전문 클리닉', url: 'https://clinicA.example.com', img: 'https://via.placeholder.com/70' },
+        { name: '정형외과 B', desc: '스포츠 손상 치료', url: 'https://clinicB.example.com', img: '' }
+      ],
+      2: [
+        { name: '내과 A', desc: '내과 종합 진료', url: 'https://clinicC.example.com', img: 'https://via.placeholder.com/70' },
+        { name: '내과 B', desc: '고혈압·당뇨 관리', url: 'https://clinicD.example.com', img: '' }
+      ],
+    };
+
+    const grid = document.getElementById('categoryGrid');
+    const listView = document.getElementById('listView');
+    const backBtn = document.getElementById('backBtn');
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const userSection = document.getElementById('userSection');
+    const settingsSection = document.getElementById('settingsSection');
+    const box2 = document.getElementById('box2');
+    const aiSupport = document.getElementById('aiSupport');
+    const carouselInner = document.getElementById('carouselInner');
+    let moreLoaded = false;
+
+    userSection.onclick = () => window.location.href = 'personal.html';
+    settingsSection.onclick = () => window.location.href = 'settings.html';
+    box2.onclick = () => window.location.href = 'box2.html';
+    aiSupport.onclick = () => window.location.href = 'aiSupport.html';
+
+    grid.addEventListener('click', e => {
+      const item = e.target.closest('.category-item');
+      if (!item) return;
+      showList(item.dataset.id);
+    });
+
+    function showList(id) {
+      listView.innerHTML = '';
+      categories[id].forEach(clinic => {
+        const div = document.createElement('div');
+        div.className = 'item';
+        div.onclick = () => window.open(clinic.url, '_blank');
+        const img = document.createElement('img');
+        img.src = clinic.img || '#';
+        div.appendChild(img);
+        const info = document.createElement('div');
+        info.className = 'info';
+        info.innerHTML = `<div class=\"name\">${clinic.name}</div><div class=\"desc\">${clinic.desc}</div>`;
+        div.appendChild(info);
+        listView.appendChild(div);
+      });
+      grid.style.display = 'none';
+      hamburgerBtn.style.display = 'none';
+      backBtn.style.display = 'block';
+      listView.style.display = 'block';
+    }
+
+    backBtn.onclick = () => {
+      listView.style.display = 'none';
+      backBtn.style.display = 'none';
+      grid.style.display = 'grid';
+      hamburgerBtn.style.display = 'block';
+    };
+
+    hamburgerBtn.onclick = () => {
+      if (!moreLoaded) {
+        for (let i = 7; i <= 9; i++) {
+          const div = document.createElement('div');
+          div.className = 'category-item';
+          div.textContent = `병원 ${i}`;
+          div.dataset.id = i;
+          grid.appendChild(div);
+        }
+        moreLoaded = true;
+        hamburgerBtn.textContent = '▲ 접기';
+      } else {
+        [...grid.children].slice(6).forEach(c => grid.removeChild(c));
+        moreLoaded = false;
+        hamburgerBtn.textContent = '☰ 더보기';
+      }
+    };
+
+    carouselInner.addEventListener('click', e => {
+      if (e.target.tagName === 'IMG') {
+        window.location.href = 'recommended-food.html';
+      }
+    });
+  </script>
+</body>
+</html>
