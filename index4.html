@@ -76,10 +76,11 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
       margin-top: 20px;
+      margin-left: -8px;
     }
     .category-item {
       background: var(--bg-gray);
-      padding: 14px;
+      padding: 10px;
       border-radius: 8px;
       text-align: center;
       cursor: pointer;
@@ -133,8 +134,8 @@
       padding: 12px;
       text-align: center;
       font-weight: bold;
-      margin-top: 50px;
-      margin-bottom: 50px;
+      margin-top: 20px;
+      margin-bottom: 20px;
       border-radius: 8px;
       background-color: rgb(255, 254, 191);
       
@@ -171,7 +172,10 @@
       top: 90%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-size: 1.2rem;
+      padding-top: 10px;
+      padding-bottom: 20px;
+      width: auto;
+      font-size: 1.1rem;
       font-weight: bold;
       color: var(--text-color);
       pointer-events: none;
@@ -193,7 +197,7 @@
         height: 100px;
     }
     .category-item img{
-      width: 70px;
+      width: 60px;
       height: 60px;
       border-radius: 50%;
       margin-bottom: 6px;
@@ -219,7 +223,7 @@
     <div class="category-grid" id="categoryGrid">
       <div class="category-item" data-id="1">정형외과<img src="정형외과.jpg" alt=""></div>
       <div class="category-item" data-id="2">&nbsp;&nbsp;&nbsp;&nbsp;내과&nbsp;&nbsp;&nbsp;&nbsp;<img src="내과.jpg" style="width: auto;"></div>
-      <div class="category-item" data-id="3">&nbsp;&nbsp;&nbsp;&nbsp;치과&nbsp;&nbsp;&nbsp;&nbsp;<img src="치과.jpg" alt=""></div>
+      <div class="category-item" style="width: auto;" data-id="3">&nbsp;치과&nbsp;&nbsp;<img src="치과.jpg" alt=""></div>
       <div class="category-item" data-id="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;피부과&nbsp;&nbsp;&nbsp;&nbsp;<img src="피부과.jpg" alt=""></div>
       <div class="category-item" data-id="5">산부인과<img src="산부인과.jpg" alt=""></div>
       <div class="category-item" data-id="6">이비인후과<img src="이비인후과.jpg" alt=""></div>
